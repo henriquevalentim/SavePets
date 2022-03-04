@@ -1,31 +1,29 @@
 import * as React from 'react';
-import {View, Text} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import {IconButton} from 'react-native-paper';
+import {VERMELHO_CLARO_FUNDO} from '../utils/constants';
 
-import {Container, CategoryTitle} from './styles';
+import {
+  ContainerCategory,
+  CategoryTitle,
+  CategoryGroup,
+  Category,
+  Conteiner,
+} from './styles';
 import CategoryItem from '../CategoryItem';
 
-function Home() {
+function Home({navigation}) {
   return (
-    <View style={{flex: 1, flexDirection: 'row'}}>
+    <Conteiner>
       <LinearGradient
-        colors={['#ED634B', '#FFF']}
+        colors={[VERMELHO_CLARO_FUNDO, '#FFF']}
         locations={[0.0, 0.0]}
         start={{x: 0.6, y: 0}}
         end={{x: 1, y: 0}}>
-        <Container>
-          <View
-            style={{
-              paddingEnd: 20,
-              paddingTop: '20%',
-            }}>
+        <ContainerCategory>
+          <Category>
             <CategoryTitle>Categorias</CategoryTitle>
-            <View
-              style={{
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignSelf: 'center',
-              }}>
+            <CategoryGroup>
               <CategoryItem
                 title={'Localidade'}
                 description={'Encontre animais perto da sua região'}
@@ -42,11 +40,18 @@ function Home() {
                   'Encontre instituições de adoação de animais e ajudem-os'
                 }
               />
-            </View>
-          </View>
-        </Container>
+            </CategoryGroup>
+          </Category>
+        </ContainerCategory>
+        <IconButton
+          icon="account"
+          color={VERMELHO_CLARO_FUNDO}
+          size={40}
+          onPress={() => navigation.navigate('Login')}
+          style={{position: 'absolute', right: 0}}
+        />
       </LinearGradient>
-    </View>
+    </Conteiner>
   );
 }
 
