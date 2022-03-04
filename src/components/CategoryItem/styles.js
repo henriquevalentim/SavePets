@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 import {CINZA_CLARO_FUNDO} from '../utils/constants';
 
-export const Box = styled.View`
+export const Box = styled.TouchableOpacity`
   flex-direction: row;
   background-color: ${CINZA_CLARO_FUNDO};
   height: 130px;

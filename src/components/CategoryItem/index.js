@@ -9,11 +9,10 @@ import {
   Description,
   DescriptionPosition,
 } from './styles';
-import {images} from '../utils/constants';
 
 function CategoryItem(props) {
   return (
-    <Box>
+    <Box onPress={() => props.navigate()}>
       <Circle
         style={{
           backgroundColor: '#FFF',

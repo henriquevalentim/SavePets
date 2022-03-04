@@ -25,12 +25,14 @@ function Home({navigation}) {
             <CategoryTitle>Categorias</CategoryTitle>
             <CategoryGroup>
               <CategoryItem
+                navigate={() => navigation.navigate('Login')}
                 title={'Localidade'}
                 description={'Encontre animais perto da sua região'}
                 image={images.map}
                 size={90}
               />
               <CategoryItem
+                navigate={() => navigation.navigate('Login')}
                 title={'Reporte'}
                 description={
                   'Reporte imagens sobre animais que precisam de ajuda'
@@ -39,6 +41,7 @@ function Home({navigation}) {
                 size={80}
               />
               <CategoryItem
+                navigate={() => navigation.navigate('Donate')}
                 title={'Doação'}
                 description={
                   'Encontre instituições de adoação de animais e ajudem-os'

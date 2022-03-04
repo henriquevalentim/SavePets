@@ -6,7 +6,7 @@ import {
   ButtonLogin,
   ImageFootprint,
 } from './styles';
-import {images, VERMELHO_CLARO_FUNDO} from '../utils/constants';
+import {images} from '../utils/constants';
 
 function Login({navigation}) {
   const [text, setText] = React.useState('');

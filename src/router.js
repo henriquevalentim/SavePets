@@ -4,6 +4,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 import Home from './components/Home';
 import Login from './components/Login';
+import Donate from './components/Donate';
 
 const Stack = createStackNavigator();
 
@@ -17,6 +18,7 @@ function Router() {
         initialRouteName="Home">
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Donate" component={Donate} />
       </Stack.Navigator>
     </NavigationContainer>
   );
