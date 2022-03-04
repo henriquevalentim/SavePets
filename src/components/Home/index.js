@@ -1,7 +1,7 @@
 import * as React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import {IconButton} from 'react-native-paper';
-import {VERMELHO_CLARO_FUNDO} from '../utils/constants';
+import {VERMELHO_CLARO_FUNDO, images} from '../utils/constants';
 
 import {
   ContainerCategory,
@@ -27,18 +27,24 @@ function Home({navigation}) {
               <CategoryItem
                 title={'Localidade'}
                 description={'Encontre animais perto da sua região'}
+                image={images.map}
+                size={90}
               />
               <CategoryItem
                 title={'Reporte'}
                 description={
                   'Reporte imagens sobre animais que precisam de ajuda'
                 }
+                image={images.donation}
+                size={80}
               />
               <CategoryItem
                 title={'Doação'}
                 description={
                   'Encontre instituições de adoação de animais e ajudem-os'
                 }
+                image={images.donate}
+                size={80}
               />
             </CategoryGroup>
           </Category>

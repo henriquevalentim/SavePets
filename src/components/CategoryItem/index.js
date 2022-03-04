@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {Text, View} from 'react-native';
 import {
   Box,
   Circle,
@@ -10,17 +9,21 @@ import {
   Description,
   DescriptionPosition,
 } from './styles';
+import {images} from '../utils/constants';
 
 function CategoryItem(props) {
   return (
     <Box>
-      <Circle>
-        <Image
-          source={{
-            uri: 'https://reactnative.dev/img/tiny_logo.png',
-          }}
-          resizeMode={'stretch'}
-        />
+      <Circle
+        style={{
+          backgroundColor: '#FFF',
+          borderRadius: props.size / 2,
+          width: props.size,
+          height: props.size,
+          justifyContent: 'center',
+          flexDirection: 'row',
+        }}>
+        <Image source={props.image} resizeMode={'stretch'} />
       </Circle>
       <DescriptionBox>
         <TitlePosition>
