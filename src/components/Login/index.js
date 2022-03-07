@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {TextInput, HelperText, IconButton, Snackbar} from 'react-native-paper';
+import {TextInput, HelperText, IconButton} from 'react-native-paper';
 import {
   Container,
   InputLoginGroup,

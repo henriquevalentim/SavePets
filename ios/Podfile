@@ -16,6 +16,8 @@ target 'SavePets' do
 
   pod 'react-native-webview', :path => '../node_modules/react-native-webview'
 
+  pod 'react-native-geolocation', :path => '../node_modules/@react-native-community/geolocation'
+
   target 'SavePetsTests' do
     inherit! :complete
     # Pods for testing

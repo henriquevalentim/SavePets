@@ -1,11 +1,11 @@
 import * as React from 'react';
-import {TextInput, HelperText, IconButton} from 'react-native-paper';
+import {TextInput, IconButton} from 'react-native-paper';
 import {
   Container,
   InputLoginGroup,
   ButtonLogin,
   ImageFootprint,
-  Input
+  Input,
 } from './styles';
 import {images} from '../utils/constants';
 

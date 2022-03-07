@@ -1,20 +1,24 @@
 import * as React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet} from 'react-native';
 import MapView from 'react-native-maps';
 import {Marker} from 'react-native-maps';
+import Geolocation from '@react-native-community/geolocation';
 import {Container} from './styles';
+import {positions} from '../utils/mock';
 
 function Map({navigation}) {
+  const [position, setPosition] = React.useState({});
+
+  React.useEffect(() => {
+    Geolocation.getCurrentPosition(info =>
+      setPosition({
+        latitude: info.coords.latitude,
+        longitude: info.coords.longitude,
+      }),
+    );
+  }, []);
+
   const styles = StyleSheet.create({
-    container: {
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      justifyContent: 'flex-end',
-      alignItems: 'center',
-    },
     map: {
       position: 'absolute',
       top: 0,
@@ -27,35 +31,21 @@ function Map({navigation}) {
     <MapView
       style={styles.map}
       initialRegion={{
-        latitude: -23.52278,
-        longitude: -46.18833,
+        latitude: position.latitude,
+        longitude: position.longitude,
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421,
       }}>
-      <Marker
-        coordinate={{
-          latitude: -23.52278,
-          longitude: -46.18833,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-        }}
-      />
-      <Marker
-        coordinate={{
-          latitude: -20.52278,
-          longitude: -46.18833,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-        }}
-      />
-      <Marker
-        coordinate={{
-          latitude: -23.52278,
-          longitude: -40.18833,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-        }}
-      />
+      {positions.map(posi => (
+        <Marker
+          coordinate={{
+            latitude: posi.latitude,
+            longitude: posi.longitude,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          }}
+        />
+      ))}
     </MapView>
   );
 }
