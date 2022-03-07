@@ -25,7 +25,7 @@ function Home({navigation}) {
             <CategoryTitle>Categorias</CategoryTitle>
             <CategoryGroup>
               <CategoryItem
-                navigate={() => navigation.navigate('Login')}
+                navigate={() => navigation.navigate('Map')}
                 title={'Localidade'}
                 description={'Encontre animais perto da sua região'}
                 image={images.map}
