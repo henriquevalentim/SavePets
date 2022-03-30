@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {TextInput, HelperText, IconButton} from 'react-native-paper';
+import {useToast} from 'react-native-toast-notifications';
 import {
   Container,
   InputLoginGroup,
@@ -12,6 +13,7 @@ import {Request} from '../utils/Request';
 function Login({navigation}) {
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const toast = useToast();
 
   const login = async () => {
     try {
@@ -23,7 +25,13 @@ function Login({navigation}) {
         navigation.navigate('Home');
       }
     } catch (error) {
-      console.log('senha incorreta');
+      toast.show('Falha no login', {
+        type: 'warning',
+        placement: 'top',
+        duration: 4000,
+
+        animationType: 'slide-in',
+      });
     }
   };
 
