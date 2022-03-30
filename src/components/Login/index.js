@@ -7,19 +7,28 @@ import {
   ImageFootprint,
 } from './styles';
 import {images} from '../utils/constants';
+import {Request} from '../utils/Request';
 
 function Login({navigation}) {
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
 
-  const hasErrors = () => {
-    return false;
+  const login = async () => {
+    try {
+      const reponse = await Request.post('users/signin', {
+        username: username,
+        password: password,
+      });
+      if (reponse) {
+        navigation.navigate('Home');
+      }
+    } catch (error) {
+      console.log('senha incorreta');
+    }
   };
 
-  const login = () => {
-    if (username === 'Root' && password === '1234') {
-      navigation.navigate('Home');
-    }
+  const hasErrors = () => {
+    return false;
   };
 
   return (
