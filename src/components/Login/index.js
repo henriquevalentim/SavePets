@@ -29,7 +29,6 @@ function Login({navigation}) {
         type: 'warning',
         placement: 'top',
         duration: 4000,
-
         animationType: 'slide-in',
       });
     }
@@ -52,6 +51,7 @@ function Login({navigation}) {
         <ImageFootprint source={images.bigFootprint} />
         <TextInput
           label="Email"
+          autoCapitalize="none"
           value={username}
           onChangeText={value => setUsername(value)}
         />
@@ -61,6 +61,7 @@ function Login({navigation}) {
         <TextInput
           onChangeText={value => setPassword(value)}
           label="Password"
+          autoCapitalize="none"
           secureTextEntry
           right={<TextInput.Icon name="eye" />}
         />

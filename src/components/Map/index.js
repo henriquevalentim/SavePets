@@ -11,21 +11,28 @@ function Map({navigation}) {
   const markerRef = React.useRef(null);
 
   React.useEffect(() => {
-    Geolocation.getCurrentPosition(info => {
-      if (info && info.coords && info.coords.latitude) {
-        setPosition({
-          latitude: info.coords.latitude,
-          longitude: info.coords.longitude,
-        });
-      } else {
-        // mock para quando o usuario não permite a utilização da localição
-        setPosition({
-          latitude: -23.123,
-          longitude: -46.852,
-        });
-      }
-      setLoading(false);
-    });
+    try {
+      Geolocation.getCurrentPosition(info => {
+        if (info && info.coords && info.coords.latitude) {
+          setPosition({
+            latitude: info.coords.latitude,
+            longitude: info.coords.longitude,
+          });
+        } else {
+          // mock para quando o usuario não permite a utilização da localição
+          setPosition({
+            latitude: -23.123,
+            longitude: -46.852,
+          });
+        }
+        setLoading(false);
+      });
+    } catch (error) {
+      setPosition({
+        latitude: -23.123,
+        longitude: -46.852,
+      });
+    }
   }, []);
 
   const onRegionChangeComplete = () => {
