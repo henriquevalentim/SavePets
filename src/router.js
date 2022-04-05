@@ -7,6 +7,7 @@ import Login from './components/Login';
 import Donate from './components/Donate';
 import Register from './components/Register';
 import Map from './components/Map';
+import Report from './components/Report';
 
 const Stack = createStackNavigator();
 
@@ -23,6 +24,7 @@ function Router() {
         <Stack.Screen name="Donate" component={Donate} />
         <Stack.Screen name="Register" component={Register} />
         <Stack.Screen name="Map" component={Map} />
+        <Stack.Screen name="Report" component={Report} />
       </Stack.Navigator>
     </NavigationContainer>
   );

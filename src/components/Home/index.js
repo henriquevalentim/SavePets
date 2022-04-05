@@ -32,7 +32,7 @@ function Home({navigation}) {
                 size={90}
               />
               <CategoryItem
-                navigate={() => navigation.navigate('Login')}
+                navigate={() => navigation.navigate('Report')}
                 title={'Reporte'}
                 description={
                   'Reporte imagens sobre animais que precisam de ajuda'
