@@ -33,6 +33,7 @@ function Home({navigation}) {
       AsyncStorage.setItem('longitude', (-46.582).toString());
     }
   }, []);
+
   return (
     <Conteiner>
       <LinearGradient
@@ -72,13 +73,14 @@ function Home({navigation}) {
             </CategoryGroup>
           </Category>
         </ContainerCategory>
-        <IconButton
-          icon="account"
-          color={VERMELHO_CLARO_FUNDO}
-          size={40}
-          onPress={() => navigation.navigate('Login')}
-          style={{position: 'absolute', right: 0}}
-        />
+
+        {/* <IconButton
+            icon="account"
+            color={VERMELHO_CLARO_FUNDO}
+            size={40}
+            onPress={() => navigation.navigate('Login')}
+            style={{position: 'absolute', right: 0}}
+          /> */}
       </LinearGradient>
     </Conteiner>
   );

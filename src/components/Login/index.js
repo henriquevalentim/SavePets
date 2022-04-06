@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {TextInput, HelperText, IconButton} from 'react-native-paper';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useToast} from 'react-native-toast-notifications';
 import {
   Container,
@@ -13,18 +14,32 @@ import {Request} from '../utils/Request';
 function Login({navigation}) {
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const [loading, setLoading] = React.useState(false);
   const [securePassword, setSecurePassword] = React.useState(true);
   const toast = useToast();
 
   const login = async () => {
     try {
+      setLoading(true);
+      if (!username && !password) {
+        toast.show('Preencha todas as informações', {
+          type: 'warning',
+          placement: 'top',
+          duration: 4000,
+          animationType: 'slide-in',
+        });
+        return;
+      }
       const reponse = await Request.post('users/signin', {
         username: username,
         password: password,
       });
       if (reponse) {
+        await AsyncStorage.setItem('username', reponse.data.username);
         navigation.navigate('Home');
       }
+      setUsername('');
+      setPassword('');
     } catch (error) {
       toast.show('Falha no login', {
         type: 'warning',
@@ -32,6 +47,8 @@ function Login({navigation}) {
         duration: 4000,
         animationType: 'slide-in',
       });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -41,13 +58,14 @@ function Login({navigation}) {
 
   return (
     <Container>
+      {/* //icone voltar
       <IconButton
         icon="arrow-left"
         color={'#FFF'}
         size={40}
         onPress={() => navigation.navigate('Home')}
         style={{position: 'absolute'}}
-      />
+      /> */}
       <InputLoginGroup>
         <ImageFootprint source={images.bigFootprint} />
         <TextInput
@@ -71,12 +89,17 @@ function Login({navigation}) {
             />
           }
         />
-        <ButtonLogin icon="dog" mode="outlined" onPress={() => login()}>
+        <ButtonLogin
+          icon="dog"
+          mode="outlined"
+          disabled={loading}
+          onPress={() => login()}>
           Entrar
         </ButtonLogin>
         <ButtonLogin
           icon="dog"
           mode="outlined"
+          disabled={loading}
           onPress={() => navigation.navigate('Register')}>
           Registrar-se
         </ButtonLogin>

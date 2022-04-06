@@ -24,7 +24,7 @@ function Register({navigation}) {
   const register = async () => {
     try {
       if (!name || !username || !password || !confirmPassword) {
-        toast.show('Todos os campos são Obrigatórios', {
+        toast.show('Todos os campos são obrigatórios', {
           type: 'warning',
           placement: 'top',
           duration: 4000,
@@ -67,7 +67,7 @@ function Register({navigation}) {
         icon="arrow-left"
         color={'#FFF'}
         size={40}
-        onPress={() => navigation.navigate('Home')}
+        onPress={() => navigation.navigate('Login')}
         style={{position: 'absolute'}}
       />
       <InputLoginGroup>
