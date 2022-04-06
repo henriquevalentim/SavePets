@@ -13,6 +13,7 @@ import {Request} from '../utils/Request';
 function Login({navigation}) {
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const [securePassword, setSecurePassword] = React.useState(true);
   const toast = useToast();
 
   const login = async () => {
@@ -62,8 +63,13 @@ function Login({navigation}) {
           onChangeText={value => setPassword(value)}
           label="Password"
           autoCapitalize="none"
-          secureTextEntry
-          right={<TextInput.Icon name="eye" />}
+          secureTextEntry={securePassword}
+          right={
+            <TextInput.Icon
+              name="eye"
+              onPress={() => setSecurePassword(!securePassword)}
+            />
+          }
         />
         <ButtonLogin icon="dog" mode="outlined" onPress={() => login()}>
           Entrar
