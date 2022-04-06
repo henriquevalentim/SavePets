@@ -18,36 +18,41 @@ function Report({navigation}) {
 
   const saveReport = async () => {
     setLoading(true);
-    if (!description && !image) {
-      toast.show('Preencha todas as informações', {
-        type: 'warning',
+    try {
+      if (!description && !image) {
+        toast.show('Preencha todas as informações', {
+          type: 'warning',
+          placement: 'top',
+          duration: 4000,
+          animationType: 'slide-in',
+        });
+        return;
+      }
+
+      const latitude = await AsyncStorage.getItem('latitude');
+      const longitude = await AsyncStorage.getItem('longitude');
+
+      const body = {
+        latitude,
+        longitude,
+        description,
+        image,
+      };
+      const response = await Request.post('locations/', body);
+      toast.show('Foto registrada com sucesso', {
+        type: 'success',
         placement: 'top',
         duration: 4000,
         animationType: 'slide-in',
       });
-      return;
+      setDescription('');
+      setImage('');
+      setIsCam(false);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
     }
-
-    const latitude = await AsyncStorage.getItem('latitude');
-    const longitude = await AsyncStorage.getItem('longitude');
-
-    const body = {
-      latitude,
-      longitude,
-      description,
-      image,
-    };
-    const response = await Request.post('locations/', body);
-    toast.show('Foto registrada com sucesso', {
-      type: 'success',
-      placement: 'top',
-      duration: 4000,
-      animationType: 'slide-in',
-    });
-    setDescription('');
-    setImage('');
-    setIsCam(false);
-    setLoading(false);
   };
 
   return (

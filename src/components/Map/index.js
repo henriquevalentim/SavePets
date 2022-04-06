@@ -3,32 +3,46 @@ import {StyleSheet, View, Text} from 'react-native';
 import MapView from 'react-native-maps';
 import {Marker, Callout} from 'react-native-maps';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {positions} from '../utils/mock';
+// import {positions} from '../utils/mock';
+import {Request} from '../utils/Request';
 
 function Map({navigation}) {
   const [position, setPosition] = React.useState({});
+  const [positions, setPositions] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
   const markerRef = React.useRef(null);
 
   React.useEffect(() => {
-    try {
-      async function getPosition() {
-        const latitude = await AsyncStorage.getItem('latitude');
-        const longitude = await AsyncStorage.getItem('longitude');
+    setLoading(true);
+    async function getCurrentPosition() {
+      try {
+        async function getPosition() {
+          const latitude = await AsyncStorage.getItem('latitude');
+          const longitude = await AsyncStorage.getItem('longitude');
+          setPosition({
+            latitude: parseFloat(latitude),
+            longitude: parseFloat(longitude),
+          });
+        }
+        getPosition();
+      } catch (error) {
         setPosition({
-          latitude: parseFloat(latitude),
-          longitude: parseFloat(longitude),
+          latitude: -23.123,
+          longitude: -46.852,
         });
+      } finally {
+        setLoading(false);
       }
-      getPosition();
-    } catch (error) {
-      setPosition({
-        latitude: -23.123,
-        longitude: -46.852,
-      });
-    } finally {
-      setLoading(false);
     }
+
+    async function getAllPosition() {
+      const response = await Request.get('locations/');
+      setPositions(response.data);
+    }
+
+    getCurrentPosition();
+    getAllPosition();
+    setLoading(false);
   }, []);
 
   const onRegionChangeComplete = () => {
