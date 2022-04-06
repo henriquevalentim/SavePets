@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {TextInput, IconButton} from 'react-native-paper';
 import {useToast} from 'react-native-toast-notifications';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Image} from 'react-native';
 import {VERMELHO_CLARO_FUNDO} from '../utils/constants';
 import {SendButton, Content} from './styles';
@@ -12,9 +13,11 @@ function Report({navigation}) {
   const [description, setDescription] = React.useState('');
   const [image, setImage] = React.useState('');
   const [isCam, setIsCam] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
   const toast = useToast();
 
   const saveReport = async () => {
+    setLoading(true);
     if (!description && !image) {
       toast.show('Preencha todas as informações', {
         type: 'warning',
@@ -25,9 +28,12 @@ function Report({navigation}) {
       return;
     }
 
+    const latitude = await AsyncStorage.getItem('latitude');
+    const longitude = await AsyncStorage.getItem('longitude');
+
     const body = {
-      latitude: '-23.000',
-      longitude: '-46.000',
+      latitude,
+      longitude,
       description,
       image,
     };
@@ -38,6 +44,10 @@ function Report({navigation}) {
       duration: 4000,
       animationType: 'slide-in',
     });
+    setDescription('');
+    setImage('');
+    setIsCam(false);
+    setLoading(false);
   };
 
   return (
@@ -82,6 +92,7 @@ function Report({navigation}) {
             style={{margin: 13}}
             icon="dog"
             mode="outlined"
+            disabled={loading}
             onPress={() => saveReport()}>
             Enviar
           </SendButton>

@@ -2,7 +2,7 @@ import * as React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import MapView from 'react-native-maps';
 import {Marker, Callout} from 'react-native-maps';
-import Geolocation from '@react-native-community/geolocation';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {positions} from '../utils/mock';
 
 function Map({navigation}) {
@@ -12,26 +12,22 @@ function Map({navigation}) {
 
   React.useEffect(() => {
     try {
-      Geolocation.getCurrentPosition(info => {
-        if (info && info.coords && info.coords.latitude) {
-          setPosition({
-            latitude: info.coords.latitude,
-            longitude: info.coords.longitude,
-          });
-        } else {
-          // mock para quando o usuario não permite a utilização da localição
-          setPosition({
-            latitude: -23.123,
-            longitude: -46.852,
-          });
-        }
-        setLoading(false);
-      });
+      async function getPosition() {
+        const latitude = await AsyncStorage.getItem('latitude');
+        const longitude = await AsyncStorage.getItem('longitude');
+        setPosition({
+          latitude: parseFloat(latitude),
+          longitude: parseFloat(longitude),
+        });
+      }
+      getPosition();
     } catch (error) {
       setPosition({
         latitude: -23.123,
         longitude: -46.852,
       });
+    } finally {
+      setLoading(false);
     }
   }, []);
 
@@ -56,7 +52,7 @@ function Map({navigation}) {
 
   return (
     <>
-      {!loading && (
+      {!loading && !!position.longitude && (
         <MapView
           onRegionChangeComplete={onRegionChangeComplete}
           style={styles.map}

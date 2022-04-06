@@ -1,6 +1,8 @@
 import * as React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import {IconButton} from 'react-native-paper';
+import Geolocation from '@react-native-community/geolocation';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {VERMELHO_CLARO_FUNDO, images} from '../utils/constants';
 
 import {
@@ -13,6 +15,24 @@ import {
 import CategoryItem from '../CategoryItem';
 
 function Home({navigation}) {
+  React.useEffect(() => {
+    try {
+      Geolocation.getCurrentPosition(info => {
+        if (info && info.coords && info.coords.latitude) {
+          AsyncStorage.setItem('latitude', info.coords.latitude.toString());
+          AsyncStorage.setItem('longitude', info.coords.longitude.toString());
+        } else {
+          // mock para quando o usuario não permite a utilização da localição
+          AsyncStorage.setItem('latitude', (-23.123).toString());
+          AsyncStorage.setItem('longitude', (-46.582).toString());
+        }
+      });
+    } catch (error) {
+      // mock para quando o usuario não permite a utilização da localição
+      AsyncStorage.setItem('latitude', (-23.123).toString());
+      AsyncStorage.setItem('longitude', (-46.582).toString());
+    }
+  }, []);
   return (
     <Conteiner>
       <LinearGradient
