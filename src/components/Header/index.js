@@ -1,19 +1,19 @@
 import * as React from 'react';
-import {IconButton, Title} from 'react-native-paper';
+import {IconButton} from 'react-native-paper';
 import {Container, ContentPosition, TitleHeader} from './styles';
 
 function Header({navigation, title}) {
   return (
     <Container>
       <ContentPosition>
+        <TitleHeader>{title}</TitleHeader>
         <IconButton
           icon="arrow-left"
           color={'#FFF'}
           size={40}
           onPress={() => navigation.navigate('Home')}
-          style={{marginLeft: 10}}
+          style={{}}
         />
-        <TitleHeader>{title}</TitleHeader>
       </ContentPosition>
     </Container>
   );
