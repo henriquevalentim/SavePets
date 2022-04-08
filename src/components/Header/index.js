@@ -12,7 +12,6 @@ function Header({navigation, title}) {
           color={'#FFF'}
           size={40}
           onPress={() => navigation.navigate('Home')}
-          style={{}}
         />
       </ContentPosition>
     </Container>

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
-import {IconButton} from 'react-native-paper';
+import {View} from 'react-native';
+import {IconButton, Menu} from 'react-native-paper';
 import Geolocation from '@react-native-community/geolocation';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {VERMELHO_CLARO_FUNDO, images} from '../utils/constants';
@@ -34,6 +35,12 @@ function Home({navigation}) {
     }
   }, []);
 
+  const [visible, setVisible] = React.useState(false);
+
+  const openMenu = () => setVisible(true);
+
+  const closeMenu = () => setVisible(false);
+
   return (
     <Conteiner>
       <LinearGradient
@@ -46,7 +53,7 @@ function Home({navigation}) {
             <CategoryTitle>Categorias</CategoryTitle>
             <CategoryGroup>
               <CategoryItem
-                navigate={() => navigation.navigate('Map')}
+                navigate={() => navigation.navigate('NavigationMap')}
                 title={'Localidade'}
                 description={'Encontre animais perto da sua região'}
                 image={images.map}
@@ -74,13 +81,31 @@ function Home({navigation}) {
           </Category>
         </ContainerCategory>
 
-        {/* <IconButton
-            icon="account"
-            color={VERMELHO_CLARO_FUNDO}
-            size={40}
-            onPress={() => navigation.navigate('Login')}
-            style={{position: 'absolute', right: 0}}
-          /> */}
+        <View
+          style={{
+            position: 'absolute',
+            right: 10,
+            top: 10,
+          }}>
+          <Menu
+            visible={visible}
+            style={{paddingTop: 60}}
+            onDismiss={closeMenu}
+            anchor={
+              <IconButton
+                icon="account"
+                color={VERMELHO_CLARO_FUNDO}
+                size={40}
+                onPress={openMenu}
+              />
+            }>
+            <Menu.Item
+              onPress={() => navigation.replace('Login')}
+              title="Sair"
+            />
+          </Menu>
+        </View>
+        {/* </Provider> */}
       </LinearGradient>
     </Conteiner>
   );

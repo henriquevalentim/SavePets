@@ -4,11 +4,9 @@ import MapView from 'react-native-maps';
 import {Marker, Callout} from 'react-native-maps';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 // import {positions} from '../utils/mock';
-import {Request} from '../utils/Request';
 
-function Map({navigation}) {
+function Map({positions, onMapLoad}) {
   const [position, setPosition] = React.useState({});
-  const [positions, setPositions] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
   const markerRef = React.useRef(null);
 
@@ -35,13 +33,7 @@ function Map({navigation}) {
       }
     }
 
-    async function getAllPosition() {
-      const response = await Request.get('locations/');
-      setPositions(response.data);
-    }
-
     getCurrentPosition();
-    getAllPosition();
     setLoading(false);
   }, []);
 
@@ -58,11 +50,16 @@ function Map({navigation}) {
       left: 0,
       right: 0,
       bottom: 0,
+      minHeight: 500,
     },
     plainView: {
       width: 60,
     },
   });
+
+  if (!onMapLoad) {
+    return <></>;
+  }
 
   return (
     <>

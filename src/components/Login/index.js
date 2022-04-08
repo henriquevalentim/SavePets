@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {TextInput, HelperText, IconButton} from 'react-native-paper';
+import {TextInput, HelperText} from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useToast} from 'react-native-toast-notifications';
 import {
@@ -34,12 +34,12 @@ function Login({navigation}) {
         username: username,
         password: password,
       });
+      setUsername('');
+      setPassword('');
       if (reponse) {
         await AsyncStorage.setItem('username', reponse.data.username);
         navigation.navigate('Home');
       }
-      setUsername('');
-      setPassword('');
     } catch (error) {
       toast.show('Falha no login', {
         type: 'warning',
@@ -58,14 +58,6 @@ function Login({navigation}) {
 
   return (
     <Container>
-      {/* //icone voltar
-      <IconButton
-        icon="arrow-left"
-        color={'#FFF'}
-        size={40}
-        onPress={() => navigation.navigate('Home')}
-        style={{position: 'absolute'}}
-      /> */}
       <InputLoginGroup>
         <ImageFootprint source={images.bigFootprint} />
         <TextInput
