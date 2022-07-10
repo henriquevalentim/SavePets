@@ -32,7 +32,7 @@ const NavigationMap = () => {
 
   const MapRoute = () => <Map positions={positions} onMapLoad={onMapLoad} />;
   const ListRoute = () => (
-    <ListPets positions={positions} title="Animais Perdidos" />
+    <ListPets positions={positions} title="Animais perdidos" />
   );
 
   React.useEffect(() => {

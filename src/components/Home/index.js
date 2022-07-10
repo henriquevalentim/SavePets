@@ -94,7 +94,7 @@ function Home({navigation}) {
           }}>
           <Menu
             visible={visible}
-            style={{paddingTop: 60}}
+            style={{paddingTop: 60, marginRight: 60}}
             onDismiss={closeMenu}
             anchor={
               <IconButton
@@ -104,10 +104,16 @@ function Home({navigation}) {
                 onPress={openMenu}
               />
             }>
+            <Menu.Item
+              onPress={() => {
+                setVisible(false);
+                navigation.navigate('MyReports');
+              }}
+              title="Meus reportes"
+            />
             <Menu.Item onPress={() => logout()} title="Sair" />
           </Menu>
         </View>
-        {/* </Provider> */}
       </LinearGradient>
     </Conteiner>
   );

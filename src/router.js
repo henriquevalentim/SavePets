@@ -9,6 +9,7 @@ import Register from './components/Register';
 import NavigationMap from './components/NavigationMap';
 import Report from './components/Report';
 import Camera from './components/Report/subcomponents/Camera';
+import MyReports from './components/MyReports';
 
 const Stack = createStackNavigator();
 
@@ -27,6 +28,7 @@ function Router() {
         <Stack.Screen name="NavigationMap" component={NavigationMap} />
         <Stack.Screen name="Report" component={Report} />
         <Stack.Screen name="Camera" component={Camera} />
+        <Stack.Screen name="MyReports" component={MyReports} />
       </Stack.Navigator>
     </NavigationContainer>
   );
