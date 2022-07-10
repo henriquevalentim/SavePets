@@ -41,6 +41,11 @@ function Home({navigation}) {
 
   const closeMenu = () => setVisible(false);
 
+  const logout = async () => {
+    AsyncStorage.clear();
+    navigation.replace('Login');
+  };
+
   return (
     <Conteiner>
       <LinearGradient
@@ -99,10 +104,7 @@ function Home({navigation}) {
                 onPress={openMenu}
               />
             }>
-            <Menu.Item
-              onPress={() => navigation.replace('Login')}
-              title="Sair"
-            />
+            <Menu.Item onPress={() => logout()} title="Sair" />
           </Menu>
         </View>
         {/* </Provider> */}

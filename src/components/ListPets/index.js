@@ -1,18 +1,22 @@
 import * as React from 'react';
-import {List} from 'react-native-paper';
+import {List, Text} from 'react-native-paper';
 import {SafeAreaView, ScrollView} from 'react-native';
 import FastImage from 'react-native-fast-image';
 
-function ListPets({positions}) {
+function ListPets({positions, title = ''}) {
   return (
     <SafeAreaView>
+      {!!title && (
+        <Text style={{textAlign: 'center', marginVertical: 15, fontSize: 30}}>
+          {title}
+        </Text>
+      )}
       <ScrollView>
         {positions &&
           positions.map(pet => (
             <List.Item
               key={pet.id}
               title={pet.description}
-              // description={pet.description}
               left={props => (
                 <FastImage
                   key={pet.id}

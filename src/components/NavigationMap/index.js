@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {BottomNavigation} from 'react-native-paper';
+
 import Map from '../Map';
 import ListPets from '../ListPets';
 import {Request} from '../utils/Request';
@@ -30,7 +31,9 @@ const NavigationMap = () => {
   }, [index]);
 
   const MapRoute = () => <Map positions={positions} onMapLoad={onMapLoad} />;
-  const ListRoute = () => <ListPets positions={positions} />;
+  const ListRoute = () => (
+    <ListPets positions={positions} title="Animais Perdidos" />
+  );
 
   React.useEffect(() => {
     async function getAllPosition() {

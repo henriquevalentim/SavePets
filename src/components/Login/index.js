@@ -18,6 +18,19 @@ function Login({navigation}) {
   const [securePassword, setSecurePassword] = React.useState(true);
   const toast = useToast();
 
+  React.useEffect(() => {
+    setLoading(true);
+    async function verifyUserIsAuthenticated() {
+      const userData = await AsyncStorage.getItem('userData');
+      if (userData) {
+        const userDataFormated = JSON.parse(userData);
+        if (userDataFormated?.id) navigation.navigate('Home');
+      }
+    }
+    verifyUserIsAuthenticated();
+    setLoading(false);
+  }, []);
+
   const login = async () => {
     try {
       setLoading(true);
@@ -37,6 +50,7 @@ function Login({navigation}) {
       setUsername('');
       setPassword('');
       if (reponse) {
+        await AsyncStorage.setItem('userData', JSON.stringify(reponse.data));
         await AsyncStorage.setItem('username', reponse.data.username);
         navigation.navigate('Home');
       }

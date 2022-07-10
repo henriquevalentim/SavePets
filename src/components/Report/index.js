@@ -31,20 +31,34 @@ function Report({navigation}) {
 
       const latitude = await AsyncStorage.getItem('latitude');
       const longitude = await AsyncStorage.getItem('longitude');
+      const userId = JSON.parse(await AsyncStorage.getItem('userData'))?.id;
 
       const body = {
         latitude,
         longitude,
         description,
         image,
+        userId,
       };
-      const response = await Request.post('locations/', body);
-      toast.show('Foto registrada com sucesso', {
-        type: 'success',
-        placement: 'top',
-        duration: 4000,
-        animationType: 'slide-in',
-      });
+
+      try {
+        const response = await Request.post('locations/', body);
+        toast.show('Foto registrada com sucesso', {
+          type: 'success',
+          placement: 'top',
+          duration: 4000,
+          animationType: 'slide-in',
+        });
+      } catch (error) {
+        console.log(error);
+        toast.show('Errou', {
+          type: 'error',
+          placement: 'top',
+          duration: 4000,
+          animationType: 'slide-in',
+        });
+      }
+
       setDescription('');
       setImage('');
       setIsCam(false);
