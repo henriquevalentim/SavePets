@@ -20,6 +20,8 @@ target 'SavePets' do
 
   pod 'react-native-camera', :path => '../node_modules/react-native-camera'
 
+  pod 'RNFastImage', :path => '../node_modules/react-native-fast-image'
+
   target 'SavePetsTests' do
     inherit! :complete
     # Pods for testing

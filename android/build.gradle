@@ -45,6 +45,10 @@ allprojects {
     }
 }
 
+project.ext {
+    excludeAppGlideModule = true
+}
+
 subprojects {
   project.configurations.all {
     resolutionStrategy.eachDependency { details ->

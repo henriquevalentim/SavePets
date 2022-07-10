@@ -1,6 +1,7 @@
 import * as React from 'react';
-import {List, Avatar} from 'react-native-paper';
+import {List} from 'react-native-paper';
 import {SafeAreaView, ScrollView} from 'react-native';
+import FastImage from 'react-native-fast-image';
 
 function ListPets({positions}) {
   return (
@@ -9,10 +10,15 @@ function ListPets({positions}) {
         {positions &&
           positions.map(pet => (
             <List.Item
+              key={pet.id}
               title={pet.description}
               // description={pet.description}
               left={props => (
-                <Avatar.Image size={100} source={{uri: pet.url_image}} />
+                <FastImage
+                  key={pet.id}
+                  style={{width: 100, height: 100, borderRadius: 50}}
+                  source={{uri: pet.url_image}}
+                />
               )}
             />
           ))}
