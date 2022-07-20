@@ -49,6 +49,7 @@ function Report({navigation}) {
           duration: 4000,
           animationType: 'slide-in',
         });
+        navigation.navigate('PetProfile', response.data);
       } catch (error) {
         console.log(error);
         toast.show('Errou', {

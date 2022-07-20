@@ -59,14 +59,14 @@ function Home({navigation}) {
             <CategoryGroup>
               <CategoryItem
                 navigate={() => navigation.navigate('NavigationMap')}
-                title={'Localidade'}
+                title={'Buscar pets'}
                 description={'Encontre animais perto da sua região'}
                 image={images.map}
                 size={90}
               />
               <CategoryItem
                 navigate={() => navigation.navigate('Report')}
-                title={'Reporte'}
+                title={'Reportar'}
                 description={
                   'Reporte imagens sobre animais que precisam de ajuda'
                 }
@@ -75,7 +75,7 @@ function Home({navigation}) {
               />
               <CategoryItem
                 navigate={() => navigation.navigate('Donate')}
-                title={'Doação'}
+                title={'Doar'}
                 description={
                   'Encontre instituições de adoação de animais e ajudem-os'
                 }

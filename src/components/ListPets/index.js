@@ -3,7 +3,7 @@ import {List, Text} from 'react-native-paper';
 import {SafeAreaView, ScrollView} from 'react-native';
 import FastImage from 'react-native-fast-image';
 
-function ListPets({positions, title = ''}) {
+function ListPets({positions, title = '', navigation}) {
   return (
     <SafeAreaView>
       {!!title && (
@@ -17,6 +17,7 @@ function ListPets({positions, title = ''}) {
             <List.Item
               key={pet.id}
               title={pet.description}
+              onPress={() => navigation.navigate('PetProfile', pet)}
               left={props => (
                 <FastImage
                   key={pet.id}

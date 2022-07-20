@@ -10,6 +10,7 @@ import NavigationMap from './components/NavigationMap';
 import Report from './components/Report';
 import Camera from './components/Report/subcomponents/Camera';
 import MyReports from './components/MyReports';
+import PetProfile from './components/PetProfile';
 
 const Stack = createStackNavigator();
 
@@ -29,6 +30,7 @@ function Router() {
         <Stack.Screen name="Report" component={Report} />
         <Stack.Screen name="Camera" component={Camera} />
         <Stack.Screen name="MyReports" component={MyReports} />
+        <Stack.Screen name="PetProfile" component={PetProfile} />
       </Stack.Navigator>
     </NavigationContainer>
   );

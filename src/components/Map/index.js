@@ -3,9 +3,8 @@ import {StyleSheet, View, Text} from 'react-native';
 import MapView from 'react-native-maps';
 import {Marker, Callout} from 'react-native-maps';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-// import {positions} from '../utils/mock';
 
-function Map({positions, onMapLoad}) {
+function Map({positions, onMapLoad, navigation}) {
   const [position, setPosition] = React.useState({});
   const [loading, setLoading] = React.useState(true);
   const markerRef = React.useRef(null);
@@ -53,7 +52,7 @@ function Map({positions, onMapLoad}) {
       minHeight: 500,
     },
     plainView: {
-      width: 60,
+      width: 150,
     },
   });
 
@@ -82,8 +81,14 @@ function Map({positions, onMapLoad}) {
                 latitudeDelta: 0.0922,
                 longitudeDelta: 0.0421,
               }}>
-              <Callout style={styles.plainView}>
-                <View>
+              <Callout
+                style={styles.plainView}
+                onPress={() => navigation.navigate('PetProfile', posi)}>
+                <View
+                  style={{
+                    width: 100,
+                    minHeight: 50,
+                  }}>
                   <Text>{posi.description}</Text>
                 </View>
               </Callout>

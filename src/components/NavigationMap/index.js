@@ -5,7 +5,7 @@ import Map from '../Map';
 import ListPets from '../ListPets';
 import {Request} from '../utils/Request';
 
-const NavigationMap = () => {
+const NavigationMap = ({navigation}) => {
   const [index, setIndex] = React.useState(0);
   const [positions, setPositions] = React.useState([]);
   const [onMapLoad, setOnMapLoad] = React.useState(true);
@@ -30,9 +30,15 @@ const NavigationMap = () => {
     }
   }, [index]);
 
-  const MapRoute = () => <Map positions={positions} onMapLoad={onMapLoad} />;
+  const MapRoute = () => (
+    <Map positions={positions} onMapLoad={onMapLoad} navigation={navigation} />
+  );
   const ListRoute = () => (
-    <ListPets positions={positions} title="Animais perdidos" />
+    <ListPets
+      positions={positions}
+      title="Animais perdidos"
+      navigation={navigation}
+    />
   );
 
   React.useEffect(() => {

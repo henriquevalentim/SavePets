@@ -11,7 +11,7 @@ function Header({navigation, title}) {
           icon="arrow-left"
           color={'#FFF'}
           size={40}
-          onPress={() => navigation.navigate('Home')}
+          onPress={() => navigation.goBack()}
         />
       </ContentPosition>
     </Container>
