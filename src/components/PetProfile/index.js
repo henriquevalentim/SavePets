@@ -29,7 +29,12 @@ function PetProfile({navigation, route}) {
         }}>
         <FastImage
           key={id}
-          style={{width: '90%', height: 300, marginLeft: '5%'}}
+          style={{
+            width: '90%',
+            height: 300,
+            marginLeft: '5%',
+            borderRadius: 10,
+          }}
           source={{
             uri: image,
           }}
