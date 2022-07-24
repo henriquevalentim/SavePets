@@ -29,7 +29,9 @@ function MyReports({navigation}) {
     <>
       <Header navigation={navigation} title="Meus reportes" />
 
-      {positions && !loading && <ListPets positions={positions} />}
+      {positions && !loading && (
+        <ListPets positions={positions} navigation={navigation} />
+      )}
     </>
   );
 }

@@ -11,7 +11,7 @@ function ListPets({positions, title = '', navigation}) {
           {title}
         </Text>
       )}
-      <ScrollView>
+      <ScrollView style={{marginBottom: 100}}>
         {positions &&
           positions.map(pet => (
             <List.Item
