@@ -12,27 +12,36 @@ function PetProfile({navigation, route}) {
   const [image, setImage] = React.useState('');
   const [id, setId] = React.useState();
   const [endereco, setEndereco] = React.useState('');
+  const [localizacao, setLocalizacao] = React.useState();
 
   React.useEffect(() => {
     if (route?.params) {
       setId(route.params.id);
       setImage(route.params.url_image);
       setDescription(route.params.description);
+      setLocalizacao({
+        latitude: route.params.latitude,
+        longitude: route.params.longitude,
+      });
     }
   }, [route.params]);
 
   async function getAddress() {
-    const response = await axios.get(
-      'https://maps.googleapis.com/maps/api/geocode/json?address=-23.5506,-46.2491&key=',
-    );
-    setEndereco(
-      _.get(response, 'data.results.0.formatted_address', 'Não encontrado'),
-    );
+    if (localizacao) {
+      const response = await axios.get(
+        `https://maps.googleapis.com/maps/api/geocode/json?address=${localizacao.latitude},${localizacao.longitude}&key=`,
+      );
+      setEndereco(
+        _.get(response, 'data.results.0.formatted_address', 'Não encontrado'),
+      );
+    }
   }
 
   React.useEffect(() => {
-    getAddress();
-  }, []);
+    if (localizacao) {
+      getAddress();
+    }
+  }, [localizacao]);
 
   return (
     <ScrollView>
